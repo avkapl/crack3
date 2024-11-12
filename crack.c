@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
     // CHALLENGE1: Use binary search instead of linear search.
 
     char password[PASS_LEN];
+    int passwordsFound = 0;
 
     while (fgets(password, PASS_LEN, passFile))
     {
@@ -57,11 +58,13 @@ int main(int argc, char *argv[])
 
         char *hash = md5(password, strlen(password));
 
-        char *found = substringSearchAA(password, hashes, size);
+        char *found = substringSearchAA(hash, hashes, size);
 		if (found)
-			printf("%s %s\n", found, hash);
-		else
-			printf("Not found!\n");
+        {
+            printf("%s %s\n", found, hash);
+            passwordsFound++;
+        }
+		free(hash);
     }
 
     // TODO
@@ -69,6 +72,7 @@ int main(int argc, char *argv[])
     //   Close the file
     fclose(passFile);
     //   Display the number of hashes found.
+    printf("Number of hashes found: %d", passwordsFound);
     //   Free up memory.
     freeAA(hashes, size);
 }
