@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
         char *found = substringSearchAA(hash, hashes, size);
 		if (found)
         {
-            printf("%s %s\n", found, hash);
+            printf("%s %s\n", password, hash);
             passwordsFound++;
         }
 		free(hash);
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     //   Close the file
     fclose(passFile);
     //   Display the number of hashes found.
-    printf("Number of hashes found: %d", passwordsFound);
+    printf("Number of hashes found: %d\n", passwordsFound);
     //   Free up memory.
     freeAA(hashes, size);
 }
